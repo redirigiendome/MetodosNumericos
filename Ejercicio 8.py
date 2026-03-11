@@ -1,10 +1,21 @@
-def f(x): return x**4 - 5*x**2 + 4
-def df(x): return 4*x**3 - 10*x
+import numpy as np
 
-xi, tol, error, it = 2.5, 0.001, 100.0, 0
-print("EJERCICIO 8 - RAÍZ MAYOR")
-while error > tol:
-    xn = xi - f(xi)/df(xi)
-    if it > 0: error = abs((xn - xi) / xn) * 100
-    xi, it = xn, it + 1
-    print(f"Iter {it}: x = {xi:.6f}, Error = {error:.6f}%")
+# Configuración de visualización: 3 dígitos después del punto decimal
+np.set_printoptions(precision=3, suppress=True)
+
+# a) Ingreso de datos por teclado
+print("Ingrese la matriz de coeficientes A (ejemplo: [[1,1,-1],[-2,1,1],[1,1,2]]):")
+A = np.array(eval(input()))
+
+print("Ingrese el vector b (ejemplo: [1,3,2]):")
+b = np.array(eval(input()))
+
+# Resolución mediante el método de eliminación (usando el solver de linalg)
+# Nota: Internamente usa factorizaciones que equivalen a Gauss/Gauss-Jordan
+x = np.linalg.solve(A, b)
+
+# Presentación de resultados
+print("\n--- Resultados ---")
+print(f"Matriz A:\n{A}")
+print(f"Vector b: {b}")
+print(f"Solución (x, y, z): {x}")
